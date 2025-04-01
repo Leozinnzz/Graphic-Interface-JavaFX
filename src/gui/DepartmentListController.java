@@ -18,49 +18,47 @@ import model.entities.Department;
 import model.services.DepartmentService;
 
 public class DepartmentListController implements Initializable {
-	
+
 	private DepartmentService service;
-	
+
 	@FXML
 	private TableView<Department> tableViewDepartment;
-	
+
 	@FXML
 	private TableColumn<Department, Integer> tableColumnId;
-	
+
 	@FXML
 	private TableColumn<Department, String> tableColumnName;
-	
+
 	@FXML
 	private Button btNew;
-	
+
 	private ObservableList<Department> obsList;
-	
+
 	public void onBtNewAction() {
 		System.out.println("New");
 	}
-	
+
 	public void setDepartmentService(DepartmentService service) {
 		this.service = service;
 	}
-	
 
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 		initializeNodes();
 	}
 
-
 	private void initializeNodes() {
 		tableColumnId.setCellValueFactory(new PropertyValueFactory<>("id"));
 		tableColumnName.setCellValueFactory(new PropertyValueFactory<>("name"));
-		
+
 		Stage stage = (Stage) Main.getMainScene().getWindow();
- 		tableViewDepartment.prefHeightProperty().bind(stage.heightProperty());
-		
+		tableViewDepartment.prefHeightProperty().bind(stage.heightProperty());
+
 	}
-	
+
 	public void updateTableView() {
-		if(service == null) {
+		if (service == null) {
 			throw new IllegalArgumentException("service was null");
 		}
 		List<Department> list = service.findAll();
